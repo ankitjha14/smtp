@@ -1,34 +1,24 @@
 package com.smtp.smtp.utils;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Date;
-
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import java.util.Date;
 
 public class EmailUtil {
 
     /**
      * Utility method to send simple HTML email
+     *
      * @param session
      * @param toEmail
      * @param subject
      * @param body
      */
-    public static void sendEmail(Session session, String toEmail, String subject, String body){
-        try
-        {
+    public static void sendEmail(Session session, String toEmail, String subject, String body) {
+        try {
             MimeMessage msg = new MimeMessage(session);
             //set message headers
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
@@ -41,7 +31,7 @@ public class EmailUtil {
 
             msg.setSubject(subject, "UTF-8");
 
-            msg.setText(body, "UTF-8");
+            msg.setContent(body, "text/html");
 
             msg.setSentDate(new Date());
 
@@ -50,8 +40,7 @@ public class EmailUtil {
             Transport.send(msg);
 
             System.out.println("EMail Sent Successfully!!");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

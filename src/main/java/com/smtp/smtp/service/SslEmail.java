@@ -2,11 +2,10 @@ package com.smtp.smtp.service;
 
 import com.smtp.smtp.utils.EmailUtil;
 
-import java.util.Properties;
-
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import java.util.Properties;
 
 public class SslEmail {
 
@@ -16,10 +15,10 @@ public class SslEmail {
      * Use Authentication: Yes
      * Port for SSL: 465
      */
-    public static void send() {
-        final String fromEmail = "your email"; //requires valid gmail id
+    public static void send(final String toEmail, String body) {
+        final String fromEmail = "youremail@gmail.com"; //requires valid gmail id
         final String password = "password"; // correct password for gmail id
-        final String toEmail = "tosend@gmail.com"; // can be any email id
+        //final String toEmail = toEmail; // can be any email id
 
         System.out.println("SSLEmail Start");
         Properties props = new Properties();
@@ -39,7 +38,8 @@ public class SslEmail {
 
         Session session = Session.getDefaultInstance(props, auth);
         System.out.println("Session created");
-        EmailUtil.sendEmail(session, toEmail, "SSLEmail Testing Subject", "SSLEmail Testing Body");
+
+        EmailUtil.sendEmail(session, toEmail, "SSLEmail Testing Subject", body);
 
     }
 
